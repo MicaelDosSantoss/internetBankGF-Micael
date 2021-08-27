@@ -1,16 +1,16 @@
 const salvarDadosDoBancoNoLocalStorage = () => {
-  const bancoAtual = pegarDadosDoLocalStorage()
+  const bancoAtual = pegarDadosDoLocalStorage("internetBank-GF")
   if(!bancoAtual){
     const usuario = new Usuario("Banco GF", 30, 'I', 'internetbank-gf@hotmail.com', '123.456.789-10')
-    const contas = [new Conta(0001, 1234, 0, usuario)]
+    const contas = [new Conta(0001, 1234, 10000, usuario)]
     const agencias = [new Agencia(0001, contas)]
     const banco = new Banco('Internet Bank GF', agencias)
     salvarDadosNoLocalStorage('internetBank-GF', banco)
   }
 }
 
-const pegarDadosDoLocalStorage = () => {
-  return JSON.parse(localStorage.getItem('internetBank-GF'))
+const pegarDadosDoLocalStorage = (key) => {
+  return JSON.parse(localStorage.getItem(key))
 }
 
 const salvarDadosNoLocalStorage = (key, value) => {
@@ -18,7 +18,7 @@ const salvarDadosNoLocalStorage = (key, value) => {
 }
 
 const criarAgencia = (conta) =>{
-  const bancoAtual = pegarDadosDoLocalStorage()
+  const bancoAtual = pegarDadosDoLocalStorage("internetBank-GF")
   const numeroDaAgencia = bancoAtual.agencias.length + 1
   const listaDeContas = [formatarConta(conta, 0001)]
   const novaAgencia = new Agencia(numeroDaAgencia, listaDeContas)
@@ -44,7 +44,7 @@ const formatarConta = (conta, numeroDaConta) =>{
 
 const salvarConta = (conta) => {
   try {
-    const bancoAtual = pegarDadosDoLocalStorage()
+    const bancoAtual = pegarDadosDoLocalStorage("internetBank-GF")
     const ultimaAgencia = bancoAtual.agencias[bancoAtual.agencias.length - 1]
     const contas = ultimaAgencia.contas
     const novaConta = formatarConta(conta, contas.length + 1)

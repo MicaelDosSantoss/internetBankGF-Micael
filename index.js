@@ -1,6 +1,14 @@
 
+var agenciaEncontrada
+var contaEncontrada
+const usuarioLogado = pegarDadosDoLocalStorage("usuario-logado")
+if(usuarioLogado){
+  window.location.href = "AreaLogada/index.html"
+}
+
+
 salvarDadosDoBancoNoLocalStorage();
-const bancoCadastrado = pegarDadosDoLocalStorage()
+const bancoCadastrado = pegarDadosDoLocalStorage("internetBank-GF")
   
 function criarConta() {
   window.location.href = "Cadastro/index.html"
@@ -14,7 +22,11 @@ function acessar() {
       document.getElementById(erro.id.substring(0, erro.id.length - 5)).classList.add("input-error")
     })
   } else {
-    alert("Login liberado")
+    salvarDadosNoLocalStorage("usuario-logado", {
+      agencia: agenciaEncontrada,
+      conta: contaEncontrada
+    })
+    window.location.href = "AreaLogada/index.html"
   }
 }
 
@@ -22,8 +34,7 @@ function verificarDados() {
   var agenciaDigitada = document.getElementById("agencia").value
   var contaDigitada = document.getElementById("conta").value
   var senhaDigitada = document.getElementById("senha").value
-  var agenciaEncontrada
-  var contaEncontrada
+
   var erros = []
 
   agenciaEncontrada = bancoCadastrado.agencias.find(

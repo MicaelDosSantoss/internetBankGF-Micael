@@ -1,4 +1,4 @@
-const bancoCadastrado = pegarDadosDoLocalStorage()
+const bancoCadastrado = pegarDadosDoLocalStorage("internetBank-GF")
 var erros = [];
 var nomeDigitado
 var cpfDigitado
@@ -21,8 +21,8 @@ const criarConta = () => {
     const resposta = salvarConta(novaConta)
     document.getElementById("form-container").classList.add("hide")
     document.getElementById("sucesso").classList.remove("hide")
-    document.getElementById("agenciaDaConta").innerHTML = ("0000"+ resposta.agencia.numero).slice(-4)
-    document.getElementById("numeroDaConta").innerHTML = ("0000"+ resposta.conta.numero).slice(-4)
+    document.getElementById("agenciaDaConta").innerHTML = ("0000" + resposta.agencia.numero).slice(-4);
+    document.getElementById("numeroDaConta").innerHTML = ("0000" + resposta.conta.numero).slice(-4);
   }catch(error){
     alert(error)
   } 
